@@ -15,8 +15,8 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
-
+    //'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mongodb'),
     /*
     |--------------------------------------------------------------------------
     | Database Connections
@@ -90,7 +90,11 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
         ],
-
+        'mongodb' => [
+                'driver' => 'mongodb',
+                'dsn' => env('DB_URI', 'mongodb+srv://chrischase011:chasechase011@gbccluster.csiir.mongodb.net/db_gbc?retryWrites=true&w=majority'),
+                'database' => 'db_gbc',
+        ],
     ],
 
     /*

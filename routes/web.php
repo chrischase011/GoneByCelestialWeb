@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +11,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+$path = "App\Http\Controllers\\";
+Route::get('login', [$path.AuthController::class, 'index'])->name('login');
+Route::get('register',[$path.AuthController::class, 'register'])->name('register');
+Route::post('newUser', [$path.AuthController::class, 'newUser'])->name('newUser');
+Route::post('logUser', [$path.AuthController::class, 'login'])->name('loginUser');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
