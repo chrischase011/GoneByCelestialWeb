@@ -7,16 +7,21 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Auth;
 use Hash;
+
+define('COST', 4096);
+
 class AuthController extends Controller
 {
     // Auth controller
     public function index()
     {
-        return view('auth.login');
+        $title = 'Login - Gone By Celestial';
+        return view('auth.login')->with('title', $title);
     }
     public function register()
     {
-        return view('auth.register');
+        $title = 'Register - Gone By Celestial';
+        return view('auth.register')->with('title', $title);
     }
     public function login(Request $request)
     {
@@ -29,7 +34,7 @@ class AuthController extends Controller
 
         if(Auth::attempt($credentials))
         {
-            return Auth::user();
+            //return Auth::user();
             return redirect()->intended('/');
         }
         else
@@ -75,31 +80,41 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:8|max:255',
             'fname' => 'required|max:25',
             'lname' => 'required|max:25',
+            'game_password' => 'required|min:8',
         ]);
 
         User::create([
+            'user_id' => $this->generateID(),
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'fname' => $request->fname,
             'lname' => $request->lname,
+            'game_password' => $this->hash256($request->game_password),
+            'roles' => '0',
         ]);
 
         return redirect()->intended('login')->with('regSuccess', 'You can now login your account.');
     }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->intended('/');
+    }
+
     protected function hash256($pass)
     {
-        $salt = 'xY245sDpI';
+        $salt = 'CxY245sDpI';
         $hash = hash('sha256', $pass).$salt;
 
         return $hash;
     }
     protected function checkHash256($pass,$aPass)
     {
-        $cost = 4096;
+
         $salt = 'xY245sDpI';
         $hash = hash('sha256', $pass).$salt;
 
-        for($i = 0; $i <= $cost; $i++)
+        for($i = 0; $i <= COST; $i++)
         {
             if($hash == $aPass)
             {
@@ -108,5 +123,18 @@ class AuthController extends Controller
         }
         return false;
     }
+    protected function generateID()
+    {
+        $id ="";
+        $id = Str::random(100);
+        while(count(User::where(['user_id' => $id])->get()) > 0)
+        {
+            if(count(User::where(['user_id' => $id])->get()) < 1)
+                break;
+            $id = Str::random(100);
+        }
+        return $id;
+    }
+
 
 }

@@ -14,10 +14,20 @@ class DropEmail extends Migration
     public function up()
     {
         //
-        Schema::table('users', function (Blueprint $table){
-            $table->dropColumn('email');
-            $table->dropColumn('email_verified');
-        });
+        if(Schema::hasColumn('users', 'email'))
+        {
+            Schema::table('users', function (Blueprint $table){
+                $table->dropColumn('email');
+            });
+        }
+        if(Schema::hasColumn('users', 'email_verified_at'))
+        {
+            Schema::table('users', function (Blueprint $table){
+                $table->dropColumn('email_verified_at');
+            });
+
+        }
+
     }
 
     /**
@@ -27,6 +37,6 @@ class DropEmail extends Migration
      */
     public function down()
     {
-        //
+
     }
 }
