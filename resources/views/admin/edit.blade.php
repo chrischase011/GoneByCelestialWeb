@@ -2,7 +2,7 @@
 @section('content')
 @foreach($data as $user)
 @endforeach
-    <div class="container rounded bg-light p-3">
+    <div class="container p-3 rounded" style="background: #1d2124;">
         @include('includes.admin')
         <div class="card w-50 m-auto my-3">
             <div class="card-header ">
@@ -11,7 +11,7 @@
                         <h4 class="h3">Edit <span class="font-weight-bold">{{ $user->fname.' '.$user->lname }}</span></h4>
                     </div>
                     <div class="col-4">
-                        <a href="{{ route('admin.users') }}" class="btn btn-outline-dark float-right">Back</a>
+                        <a href="{{ url()->previous()  }}" class="btn btn-outline-dark float-right">Back</a>
                     </div>
                 </div>
                 @if(session()->has('invalidPassword'))
@@ -32,13 +32,8 @@
                       </div>
                      </div>
                 @endif
-
-
-
-
             </div>
-
-            <form action="{{ route('admin.edit.user') }}" method="post">
+            <form action="{{ route('admin.edit_user') }}" method="post">
                 @csrf
                 <div class="card-body">
                     <input type="hidden" id="edit_user_id" name="user_id" value="{{$user->user_id }}">

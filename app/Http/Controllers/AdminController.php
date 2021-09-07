@@ -14,9 +14,12 @@ class AdminController extends Controller
     {
         return view('admin.index')->with('title','Admin Dashboard - Gone By Celestial');
     }
+
+    ############################# Users Section #############################
+
     public function users()
     {
-        $data = User::paginate(10);
+        $data = User::orderBy('roles', 'desc')->paginate(10);
         return view('admin.users',['data' => $data,])->with('title','Users Management - Gone By Celestial');
     }
     public function edit(Request $request)
@@ -32,6 +35,10 @@ class AdminController extends Controller
         }
 
         $data = User::where(['user_id' => $id])->get();
+        if(count($data) < 1)
+        {
+            return abort(403,'Invalid Request. Are you lost baby girl?');
+        }
         $getName = "";
         foreach ($data as $user)
         {
@@ -73,14 +80,7 @@ class AdminController extends Controller
         return back()->with('editSuccess', 'Successfully edit <strong>'.$request->fname.' '.$request->lname.'</strong> account.');
     }
 
-    public function check_password(Request $request)
-    {
-        if(!Hash::check($request->value, Auth::user()->password))
-        {
-            return 0;
-        }
-        return 1;
-    }
+
 
     public function set_admin(Request $request)
     {
@@ -128,8 +128,34 @@ class AdminController extends Controller
             'roles' => '0',
         ]);
 
-        return back()->with('success', 'You can now login your account.');
+        return back()->with('success', 'New user successfully added.');
     }
+
+    public function delete_user(Request $request)
+    {
+        $user = User::where(['user_id' => $request->id])->first();
+        if(!empty($user))
+        {
+            $user->delete();
+            return 1;
+        }
+        return 0;
+    }
+
+    ########################### End of News Section ######################################
+
+    ############################ News Section ############################################
+
+
+
+
+
+
+
+
+
+
+    ########################### End of News Section ######################################
 
 
     //Protected *Do not delete
@@ -151,5 +177,13 @@ class AdminController extends Controller
         $hash = hash('sha256', $pass).$salt;
 
         return $hash;
+    }
+    protected function check_password(Request $request)
+    {
+        if(!Hash::check($request->value, Auth::user()->password))
+        {
+            return 0;
+        }
+        return 1;
     }
 }

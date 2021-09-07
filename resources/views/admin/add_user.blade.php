@@ -1,9 +1,17 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container p-3 rounded" style="background: #1d2124;">
+        @include('includes.admin')
         <div class="card m-auto w-50">
-            <div class="card-header card-header-pills">
-                <h4 class="card-title">Add new user</h4>
+            <div class="card-header rounded-top">
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="h3 card-title">Add new user</h4>
+                    </div>
+                    <div class="col-4">
+                        <a href="{{ url()->previous()  }}" class="btn btn-outline-dark float-right">Back</a>
+                    </div>
+                </div>
             </div>
             <form action="{{ route('admin.add.user') }}" method="post">
                 @csrf

@@ -28,10 +28,15 @@ Route::group(['middleware' => 'adminAccess'],function(){
     Route::get('admin/users/edit', [\App\Http\Controllers\AdminController::class, 'edit'])->name('admin.edit');
     Route::get('admin/users/add_user/{token}', [\App\Http\Controllers\AdminController::class,'add_user'])
         ->name('admin.add_user');
+    Route::get('admin/news', [\App\Http\Controllers\NewsUpdatesController::class,'index'])->name('admin.news');
+    Route::get('admin/news/add_news', [\App\Http\Controllers\NewsUpdatesController::class, 'add_news'])
+        ->name('admin.add.news');
+    Route::get('admin/news/edit', [\App\Http\Controllers\NewsUpdatesController::class, 'edit_news'])
+        ->name('admin.edit.news');
 
     // Post Methods
-    Route::post('admin/users/edit/edit_user',[\App\Http\Controllers\AdminController::class,'editUser'])
-        ->name('admin.edit.user');
+    Route::post('admin/users/edit/edit_user_account',[\App\Http\Controllers\AdminController::class,'editUser'])
+        ->name('admin.edit_user');
     Route::post('admin/users/set_admin', [\App\Http\Controllers\AdminController::class, 'set_admin'])
         ->name('set_admin');
     Route::post('admin/users/check_password', [\App\Http\Controllers\AdminController::class, 'check_password'])
@@ -40,7 +45,21 @@ Route::group(['middleware' => 'adminAccess'],function(){
         ->name('remove_admin');
     Route::post('admin/users/edit/edit_user',[\App\Http\Controllers\AdminController::class,'addUser'])
         ->name('admin.add.user');
+    Route::post('admin/users/delete_user', [\App\Http\Controllers\AdminController::class, 'delete_user'])
+        ->name('delete_user');
+    Route::post('admin/news/add_news/submit_news', [\App\Http\Controllers\NewsUpdatesController::class, 'addNews'])
+        ->name('submit_news');
+    Route::post('admin/news/edit/edit_news', [\App\Http\Controllers\NewsUpdatesController::class, 'editNews'])
+        ->name('edit_news');
 
 });
+
+// Routes with no required middleware
+
+Route::get('news/{n_id}',[\App\Http\Controllers\NewsUpdatesController::class,'preview_news'])
+    ->name('preview_news');
+Route::get('updates/{n_id}',[\App\Http\Controllers\NewsUpdatesController::class,'preview_updates'])
+    ->name('preview_updates');
+
 Route::get('logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');

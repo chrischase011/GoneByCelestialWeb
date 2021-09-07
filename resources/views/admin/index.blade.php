@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="container bg-light p-2 rounded">
+    <div class="container p-3 rounded" style="background: #1d2124;">
         @include('includes.admin')
         <div class="row p-4">
             <div class="col-3">
