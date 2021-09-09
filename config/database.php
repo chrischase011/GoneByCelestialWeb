@@ -85,7 +85,7 @@ return [
             'database' => 'd5to7c1g46k1jo',
             'username' => 'qohbteaqddzijl',
             'password' => '1ce67c3ef26d4337cf1e52fe87db6470e4e89fb2ae57ed824db5b6c474a9b276',
-            'charset' => 'utf8mb4',
+            'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
             'schema' => 'public',
