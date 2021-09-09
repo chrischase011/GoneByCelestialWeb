@@ -15,8 +15,8 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
-   // 'default' => env('DB_CONNECTION', 'mongodb'),
+    //'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
     /*
     |--------------------------------------------------------------------------
     | Database Connections
@@ -63,14 +63,28 @@ return [
             ]) : [],
         ],
 
+//        'pgsql' => [
+//            'driver' => 'pgsql',
+//            'url' => env('DATABASE_URL'),
+//            'host' => env('DB_HOST', '127.0.0.1'),
+//            'port' => env('DB_PORT', '5432'),
+//            'database' => env('DB_DATABASE', 'forge'),
+//            'username' => env('DB_USERNAME', 'forge'),
+//            'password' => env('DB_PASSWORD', ''),
+//            'charset' => 'utf8',
+//            'prefix' => '',
+//            'prefix_indexes' => true,
+//            'schema' => 'public',
+//            'sslmode' => 'prefer',
+//        ],
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'url' => 'postgres://qohbteaqddzijl:1ce67c3ef26d4337cf1e52fe87db6470e4e89fb2ae57ed824db5b6c474a9b276@ec2-52-21-153-207.compute-1.amazonaws.com:5432/d5to7c1g46k1jo',
+            'host' => "ec2-52-21-153-207.compute-1.amazonaws.com",
+            'port' => '5432',
+            'database' => 'd5to7c1g46k1jo',
+            'username' => 'qohbteaqddzijl',
+            'password' => '1ce67c3ef26d4337cf1e52fe87db6470e4e89fb2ae57ed824db5b6c474a9b276',
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
