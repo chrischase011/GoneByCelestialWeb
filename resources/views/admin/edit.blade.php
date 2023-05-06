@@ -18,7 +18,7 @@
                     <div class="row p-3">
                         <div class="col-12">
                             <center>
-                                <span class="alert alert-danger text-center">{{ session()->get('invalidPassword') }}</span>
+                                <span class="alert alert-danger text-center">{!! session()->get('invalidPassword') !!}</span>
                             </center>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                     <div class="row p-3">
                         <div class="col-12">
                         <center>
-                            <span class="alert alert-success text-center">{{ session()->get('editSuccess') }}</span>
+                            <span class="alert alert-success text-center">{!! session()->get('editSuccess') !!}</span>
                         </center>
                       </div>
                      </div>

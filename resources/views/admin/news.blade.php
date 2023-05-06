@@ -58,7 +58,7 @@
                                 <a href="{{route('preview_updates', ['n_id' => $news->n_id])}}" class="btn btn-outline-light p-1">Preview</a>
                             @endif
                             <a href="{{ route('admin.edit.news',['id' => $news->n_id]) }}" class="btn btn-outline-warning p-1">Edit</a>
-                            <button class="btn btn-outline-danger p-1">Delete</button>
+                            <button type="button" onclick="deleteNews('{{$news->n_id}}', '{{csrf_token()}}')" class="btn btn-outline-danger p-1">Delete</button>
                         </td>
                     </tr>
                 @endforeach

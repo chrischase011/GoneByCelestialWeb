@@ -13,10 +13,6 @@
                     <div class="carousel-item">
                         <img src="https://cdn.wallpapersafari.com/14/52/2rXqit.jpg" class="d-block w-100" alt="..." style="height: 300px; max-height: 300px;">
                     </div>
-                    <div class="carousel-item">
-                        <img src="https://coolwallpapers.me/picsup/6000656-maniac-killer-sweater-knife-freddy-krueger-glove-nightmares-on-elm-street-smile-horror-stripes.jpg"
-                         class="d-block w-100" alt="..." style="height: 300px; max-height: 300px;">
-                    </div>
                 </div>
             </div>
         </div>
@@ -39,13 +35,12 @@
                             @if($new->preview == "")
                                 <img src="https://www.kindpng.com/picc/m/80-807524_no-profile-hd-png-download.png" class="card-img-top" style="height: 250px;">
                             @else
-                                <img src="data:image/png;base64, {{$new->preview}}" class="card-img-top">
+                                <img src="data:image/jpg;base64, {{$new->preview}}" class="card-img-top w-100 h-100">
                             @endif
                         </div>
-                        <div class="card-footer">
-                            <center>
-                                <a href="{{route('preview_news', ['n_id' => $new->n_id])}}" class="text-info text-decoration-none"><strong class="h1">{{$new->title}}</strong></a>
-                            </center>
+                        <div class="card-footer text-center pb-5">
+                            <a href="{{route('preview_news', ['n_id' => $new->n_id])}}" class="text-info text-decoration-none"><strong class="h1">{{$new->title}}</strong></a><br>
+                            <small class="text-white pt-3">{{ date('F d, Y h:i a', strtotime($new->created_at)) }}</small>
                         </div>
                     </div>
                 </div>
@@ -70,13 +65,13 @@
                         @if($update->preview == "")
                             <img src="https://www.kindpng.com/picc/m/80-807524_no-profile-hd-png-download.png" class="card-img-top" style="height: 250px;">
                         @else
-                            <img src="data:image/png;base64, {{$update->preview}}" class="card-img-top">
+                            <img src="data:image/png;base64, {{$update->preview}}" class="card-img-top w-100 h-100">
                         @endif
+
                     </div>
-                    <div class="card-footer">
-                        <center>
-                            <a href="{{route('preview_updates', ['n_id' => $update->n_id])}}" class="text-info text-decoration-none"><strong class="h1">{{$update->title}}</strong></a>
-                        </center>
+                    <div class="card-footer text-center pb-5">
+                        <a href="{{route('preview_updates', ['n_id' => $update->n_id])}}" class="text-info text-decoration-none text-center"><strong class="h1">{{$update->title}}</strong></a><br>
+                        <small class="text-white text-center mt-5">{{ date('F d, Y h:i a', strtotime($update->created_at)) }}</small>
                     </div>
                 </div>
             </div>

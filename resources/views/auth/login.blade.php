@@ -38,7 +38,12 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-outline-primary btn-lg btn-block">Login</button>
+                    <div class="container">
+                        <button class="btn btn-outline-primary btn-lg btn-block">Login</button>
+                    </div>
+                    <div class="container mt-3 text-center">
+                        <a href="{{route('forgotPassword')}}">Forgot password</a>
+                    </div>
                 </div>
             </form>
         </div>

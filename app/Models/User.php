@@ -13,8 +13,8 @@ class User extends Authenticatable
 
     use HasApiTokens, HasFactory, Notifiable;
     /**
-    protected $connection = 'mongodb';
-    protected $collection = 'users';
+    // protected $connection = 'mongodb';
+    // protected $collection = 'users';
      */
       protected $table = 'users';
       public $primaryKey = 'id';
@@ -29,7 +29,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'fname', 'lname' , 'password', 'game_password', 'roles','user_id',
+        'username', 'email','email_token', 'approvedEmail', 'fname', 'lname' , 'password', 'roles','user_id', "buildIndex", "hasPistol","hasAxe","health","x","y","z",
+        "progress","monsterKilled","deathCount",
     ];
 
     /**

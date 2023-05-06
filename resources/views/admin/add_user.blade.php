@@ -31,7 +31,7 @@
                         @enderror
                     </div>
                     <div class="form-row">
-                        <label>Web Password</label>
+                        <label>Password</label>
                         <input type="password" name="password" class="form-control w-100 @error('password') is-invalid @enderror" value="{{ old('password') }}">
                         @error('password')
                         <div class="invalid-feedback">
@@ -40,7 +40,7 @@
                         @enderror
                     </div>
                     <div class="form-row">
-                        <label>Confirm Web Password</label>
+                        <label>Confirm Password</label>
                         <input type="password" name="password_confirmation" class="form-control w-100 @error('password_confirmation') is-invalid @enderror" value="{{ old('password_confirmation') }}">
                         @error('password_confirmation')
                         <div class="invalid-feedback">
@@ -48,7 +48,7 @@
                         </div>
                         @enderror
                     </div>
-                    <div class="form-row">
+                    <div class="form-row d-none">
                         <label>Game Password </label><span class="text-success ml-auto">Note: This will serve as an in-game password.</span>
                         <input type="password" name="game_password" class="form-control w-100 @error('game_password') is-invalid @enderror" value="{{ old('game_password') }}">
                         @error('game_password')

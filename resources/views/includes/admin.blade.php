@@ -8,7 +8,10 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.news') }}">News/Update Management</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item d-none">
+        <a class="nav-link disabled" href="#">Carousel Management</a>
+    </li>
+    <li class="nav-item d-none">
         <a class="nav-link disabled" href="#">Forum Management</a>
     </li>
 </ul>

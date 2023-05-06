@@ -146,4 +146,29 @@ class NewsUpdatesController extends Controller
                 .$request->title.'</b>');
     }
 
+
+    public function deleteArticle(Request $request)
+    {
+        $id = $request->id;
+
+        $article = NewsUpdates::where(['n_id' => $id])->first();
+
+        if($article)
+        {
+            $article->delete();
+
+            return 1;
+        }
+
+        return 'Error';
+    }
+
+
+    // Articles
+
+    public function articles()
+    {
+        $articles = NewsUpdates::orderBy('id','desc')->get();
+        return view('pages.articles', ['articles' => $articles])->with('title', 'Articles - Gone By Celestial');
+    }
 }

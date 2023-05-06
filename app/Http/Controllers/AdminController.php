@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NewsUpdates;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,10 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.index')->with('title','Admin Dashboard - Gone By Celestial');
+        $total_user = count(User::where('roles', '!=', '1')->get());
+        $total_news = count(NewsUpdates::where(['category' => '1'])->get());
+        $total_updates = count(NewsUpdates::where(['category' => '2'])->get());
+        return view('admin.index', ['total_user' => $total_user, 'total_news' => $total_news, 'total_updates' => $total_updates])->with('title','Admin Dashboard - Gone By Celestial');
     }
 
     ############################# Users Section #############################
@@ -84,7 +88,7 @@ class AdminController extends Controller
 
     public function set_admin(Request $request)
     {
-        $user = User::where(['user_id' => $request->id])->first();
+        $user = User::where(['id' => $request->id])->first();
         if(!empty($user))
         {
             $user->roles = '1';
@@ -95,7 +99,7 @@ class AdminController extends Controller
     }
     public function remove_admin(Request $request)
     {
-        $user = User::where(['user_id' => $request->id])->first();
+        $user = User::where(['id' => $request->id])->first();
         if(!empty($user))
         {
             $user->roles = '0';
@@ -115,7 +119,6 @@ class AdminController extends Controller
             'password' => 'required|confirmed|min:8|max:255',
             'fname' => 'required|max:25',
             'lname' => 'required|max:25',
-            'game_password' => 'required|min:8',
         ]);
 
         User::create([
@@ -124,7 +127,6 @@ class AdminController extends Controller
             'password' => Hash::make($request->password),
             'fname' => $request->fname,
             'lname' => $request->lname,
-            'game_password' => $this->hash256($request->game_password),
             'roles' => '0',
         ]);
 
@@ -133,7 +135,7 @@ class AdminController extends Controller
 
     public function delete_user(Request $request)
     {
-        $user = User::where(['user_id' => $request->id])->first();
+        $user = User::where(['id' => $request->id])->first();
         if(!empty($user))
         {
             $user->delete();
@@ -178,10 +180,31 @@ class AdminController extends Controller
 
         return $hash;
     }
-    protected function check_password(Request $request)
+    public function check_password(Request $request)
     {
+        $id = $request->id;
+
+    
+
         if(!Hash::check($request->value, Auth::user()->password))
         {
+            return "Password incorrect";
+            return 0;
+        }
+
+        return 1;
+
+        return "ID:". $id;
+        $user = User::find($id);
+
+        if(!$user== "")
+        {   
+            $user->role = 2;
+            $user->save();
+        }
+        else
+        {
+            return "can't find user";
             return 0;
         }
         return 1;

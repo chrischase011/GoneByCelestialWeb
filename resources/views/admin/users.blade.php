@@ -48,13 +48,13 @@
                                 <button class="btn btn-outline-primary p-1 disabled" disabled>Remove Admin</button>
                             @endif
                         @elseif($users->roles == '1')
-                            <button class="btn btn-outline-primary p-1" onclick="removeAdmin('{{$users->user_id}}','{{csrf_token()}}')">Remove Admin</button>
+                            <button class="btn btn-outline-primary p-1" onclick="removeAdmin('{{$users->id}}','{{csrf_token()}}')">Remove Admin</button>
                         @else
-                            <button class="btn btn-outline-light p-1" onclick="setAdmin('{{$users->user_id}}','{{csrf_token()}}')">Set as Admin</button>
+                            <button class="btn btn-outline-light p-1" onclick="setAdmin('{{$users->id}}','{{csrf_token()}}')">Set as Admin</button>
                         @endif
                         <a href="{{ route('admin.edit',['id' => $users->user_id]) }}" class="btn btn-outline-info p-1" data-id="{{ $users->user_id }}">
                             Edit</a>
-                        <button class="btn btn-outline-danger p-1" onclick="deleteUser('{{$users->user_id}}','{{csrf_token()}}')">Delete</button>
+                        <button class="btn btn-outline-danger p-1" onclick="deleteUser('{{$users->id}}','{{csrf_token()}}')">Delete</button>
                     </td>
                 </tr>
                 @endforeach
